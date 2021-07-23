@@ -5,6 +5,7 @@ const Home = () => {
   return (
     <div className="Home">
       <h1>홈</h1>
+      새로운걸 고마 추가 했다잉
     </div>
   );
 }
