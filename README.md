@@ -1,2 +1,2 @@
-# react sand box
-리액트 연습용 sand box
+# react sandbox
+리액트 연습용 sandbox
