@@ -33,11 +33,14 @@ function MyForm({ onSubmit }: MyFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input name="name" value={name} onChange={onChange} />
-      <textarea name="description" value={description} onChange={onChange} />
-      <button type="submit">등록</button>
-    </form>
+    <div>
+      <h2>My Form</h2>
+      <form onSubmit={handleSubmit}>
+        <input name="name" value={name} onChange={onChange} />
+        <textarea name="description" value={description} onChange={onChange} />
+        <button type="submit">등록</button>
+      </form>
+    </div>
   );
 }
 
