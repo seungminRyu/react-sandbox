@@ -36,6 +36,8 @@ function MyForm({ onSubmit }: MyFormProps) {
       description: ''
     });
     
+    // ref의 currnet 안의 값을 사용하려면 null 체킹을 해주어야 한다.
+    // 타입스크립트에서 만약 어떤 타입이 undifined 이거나 null일 수 있는 상황에서는, 해당 값이 유효한지 체킹하는 작업이 꼭 필요하다
     if (!$input.current) return;
     $input.current.focus();  
   };
