@@ -8,8 +8,8 @@
 // 따라서 useCallback을 활용하여 함수를 재사용할 수 있다.
 
 import React, { useMemo, useRef, useState, useCallback } from "react";
-import UserList from "./UserList";
-import CreateUser from "./CreateUser";
+import UserList from "../UserList";
+import CreateUser from "../CreateUser";
 
 const countActiveUsers = (users) => {
     console.log("활성 사용자 수를 세는 중...");

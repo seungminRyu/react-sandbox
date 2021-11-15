@@ -2,8 +2,8 @@
 // 17 - useMemo 를 사용하여 연산한 값 재 사용하기
 
 import React, { useMemo, useRef, useState } from "react";
-import UserList from "./UserList";
-import CreateUser from "./CreateUser";
+import UserList from "../UserList";
+import CreateUser from "../CreateUser";
 
 const countActiveUsers = (users) => {
     console.log("활성 사용자 수를 세는 중...");
