@@ -1,6 +1,6 @@
 import React from "react";
 
-function User({ user, onRemove, onToggle }) {
+const User = React.memo(function User({ user, onRemove, onToggle }) {
     return (
         <div>
             <b
@@ -17,7 +17,7 @@ function User({ user, onRemove, onToggle }) {
             <button onClick={() => onRemove(user.id)}>삭제</button>
         </div>
     );
-}
+});
 
 function UserList({ users, onRemove, onToggle }) {
     return (
@@ -34,4 +34,9 @@ function UserList({ users, onRemove, onToggle }) {
     );
 }
 
-export default UserList;
+// React.memo에서 두번째 파라미터에 propsAreEqual이라는 함수를 사용하여 특정 값들만 비교를 하는것도 가능하다.
+// export default React.memo(UserList);
+export default React.memo(
+    UserList,
+    (prevProps, nextProps) => prevProps.users === nextProps.users
+);
