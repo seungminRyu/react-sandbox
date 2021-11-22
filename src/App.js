@@ -4,6 +4,7 @@ import UseCallbackApp from "./18-UseCallback/UseCallbackApp";
 import ReactMemoApp from "./19-React.memo/ReactMemoApp";
 import CustomHookApp from "./21-CustomHooks/CustomHookApp";
 import ContextApiApp from "./22-ContextAPI/ContextApiApp";
+import CounterContainer from "./redux-3-make-counter/CounterContainer";
 
 function App() {
     return (
@@ -12,9 +13,10 @@ function App() {
                 <h1>Welcome to Sandbox</h1>
                 {/* <UseMemoApp /> */}
                 {/* <UseCallbackApp /> */}
-                <ReactMemoApp />
+                {/* <ReactMemoApp /> */}
                 {/* <CustomHookApp /> */}
                 {/* <ContextApiApp /> */}
+                <CounterContainer />
             </header>
         </div>
     );
