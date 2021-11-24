@@ -6,6 +6,7 @@ import CustomHookApp from "./21-CustomHooks/CustomHookApp";
 import ContextApiApp from "./22-ContextAPI/ContextApiApp";
 import CounterContainer from "./redux-3-make-counter/CounterContainer";
 import TodosContainer from "./redux-4-make-todo/TodosContainer";
+import ImmerApp from "./23-immer/ImmerApp";
 
 function App() {
     return (
@@ -17,9 +18,10 @@ function App() {
                 {/* <ReactMemoApp /> */}
                 {/* <CustomHookApp /> */}
                 {/* <ContextApiApp /> */}
-                {/* <CounterContainer />
+                <CounterContainer />
                 <hr />
-                <TodosContainer /> */}
+                <TodosContainer />
+                {/* <ImmerApp /> */}
             </header>
         </div>
     );

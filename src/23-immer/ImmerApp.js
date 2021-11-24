@@ -12,7 +12,7 @@ import React, {
     useRef,
     useState,
 } from "react";
-import UserList from "./ContextApiUserList";
+import UserList from "../22-ContextAPI/ContextApiUserList";
 import CreateUser from "../CreateUser";
 import useInputs from "../hooks/useInputs";
 import produce from "immer";
@@ -91,9 +91,9 @@ function ContextApiApp() {
     });
 
     const [state, dispatch] = useReducer(reducer, initialState);
-    const nextId = useRef(4);
-
     const { users } = state;
+
+    const nextId = useRef(4);
 
     const onCreate = useCallback(() => {
         dispatch({
