@@ -12,7 +12,7 @@ import React, {
     useRef,
     useState,
 } from "react";
-import UserList from "../22-ContextAPI/ContextApiUserList";
+import UserList from "./ImmerUserList";
 import CreateUser from "../CreateUser";
 import useInputs from "../hooks/useInputs";
 import produce from "immer";
@@ -68,7 +68,7 @@ function reducer(state, action) {
             // Immer 사용 후
             return produce(state, (draft) => {
                 const user = draft.users.find((user) => user.id === action.id);
-                user.active = !user.action;
+                user.active = !user.active;
             });
         case "REMOVE_USER":
             return produce(state, (draft) => {
