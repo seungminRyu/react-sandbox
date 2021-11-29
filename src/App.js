@@ -7,6 +7,7 @@ import ContextApiApp from "./22-ContextAPI/ContextApiApp";
 import CounterContainer from "./redux-3-make-counter/CounterContainer";
 import TodosContainer from "./redux-4-make-todo/TodosContainer";
 import ImmerApp from "./23-immer/ImmerApp";
+import ApiUsers from "./API-1-basic/ApiUsers";
 
 function App() {
     return (
@@ -21,7 +22,8 @@ function App() {
                 {/* <CounterContainer />
                 <hr />
                 <TodosContainer /> */}
-                <ImmerApp />
+                {/* <ImmerApp /> */}
+                <ApiUsers />
             </header>
         </div>
     );
