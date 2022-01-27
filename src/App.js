@@ -9,6 +9,10 @@ import TodosContainer from "./redux-4-make-todo/TodosContainer";
 import ImmerApp from "./23-immer/ImmerApp";
 import ApiUsers from "./API-1-basic/ApiUsers";
 import CounterContainer from "./redux-middleware-1-intro/CounterContainer";
+import PostListContainer from "./redux-middleware-5-promise/containers/PostListContainer";
+import { Route } from "react-router-dom";
+import PostListPage from "./redux-middleware-5-promise/pages/PostListPage";
+import PostPage from "./redux-middleware-5-promise/pages/PostPage";
 
 function App() {
     return (
@@ -26,6 +30,9 @@ function App() {
                 {/* <ImmerApp /> */}
                 {/* <ApiUsers /> */}
                 <CounterContainer />
+                <hr />
+                <Route path="/" component={PostListPage} exact={true} />
+                <Route path="/:id" component={PostPage} />
             </header>
         </div>
     );
