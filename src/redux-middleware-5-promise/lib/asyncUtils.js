@@ -1,3 +1,5 @@
+import { call, put } from "redux-saga/effects";
+
 // Promise에 기반한 Thunk를 만들어주는 함수
 export const createPromiseThunk = (type, promiseCreator) => {
     const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
@@ -14,6 +16,33 @@ export const createPromiseThunk = (type, promiseCreator) => {
             dispatch({ type: SUCCESS, payload }); // 성공
         } catch (e) {
             dispatch({ type: ERROR, payload: e, error: true }); // 실패
+        }
+    };
+};
+
+// 프로미스를 기다렸다가 결과를 디스패치하는 사가
+export const createPromiseSaga = (type, promiseCreator) => {
+    const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
+    return function* saga(action) {
+        try {
+            // 재사용성을 위해 promiseCreator의 파라미터에는 action.payload 값을 넣도록 설정한다.
+            const payload = yield call(promiseCreator, action.payload);
+            yield put({ type: SUCCESS, payload });
+        } catch (e) {
+            yield put({ type: ERROR, error: true, payload: e });
+        }
+    };
+};
+
+export const createPromoiseSagaById = (type, promiseCreator) => {
+    const [SUCCESS, ERROR] = [`${type}_SUCCES`, `${type}_ERROR`];
+    return function* saga(action) {
+        const id = action.meta;
+        try {
+            const payload = yield call(promiseCreator, action.payload);
+            yield put({ type: SUCCESS, payload, meta: id });
+        } catch (e) {
+            yield put({ type: ERROR, error: e, meta: id });
         }
     };
 };
@@ -49,14 +78,16 @@ export const reducerUtils = {
 
 // 비동기 관련 액션들을 처리하는 리듀서를 만들어 준다.
 // type 은 액션의 타입, key는 상태의 key (예: posts, post) 이다.
-export const handleAsyncActions = (type, key) => {
+export const handleAsyncActions = (type, key, keepData = false) => {
     const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
     return (state, action) => {
         switch (action.type) {
             case type: {
                 return {
                     ...state,
-                    [key]: reducerUtils.loading(),
+                    [key]: reducerUtils.loading(
+                        keepData ? state[key].data : null
+                    ),
                 };
             }
             case SUCCESS: {
@@ -71,6 +102,46 @@ export const handleAsyncActions = (type, key) => {
                     [key]: reducerUtils.error(action.payload),
                 };
             }
+            default:
+                return state;
+        }
+    };
+};
+
+export const handleAsyncActionsById = (type, key, keepData = false) => {
+    const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
+    return (state, action) => {
+        const id = action.meta;
+        switch (action.type) {
+            case type:
+                return {
+                    ...state,
+                    [key]: {
+                        ...state[key],
+                        [id]: reducerUtils.loading(
+                            // state[key][id]가 만들어져있지 않을 수도 있기 때문에 유효성을 먼저 검사 후 data 조회
+                            keepData
+                                ? state[key][id] && state[key][id].data
+                                : null
+                        ),
+                    },
+                };
+            case SUCCESS:
+                return {
+                    ...state,
+                    [key]: {
+                        ...state[key],
+                        [id]: reducerUtils.success(action.payload),
+                    },
+                };
+            case ERROR:
+                return {
+                    ...state,
+                    [key]: {
+                        ...state[key],
+                        [id]: reducerUtils.error(action.payload),
+                    },
+                };
             default:
                 return state;
         }
